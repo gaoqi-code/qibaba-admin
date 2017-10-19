@@ -164,6 +164,41 @@
 			layer.msg('已启用!', {icon: 6,time:1000});
 		});
 	}
+	
+	/*
+	*删除用户信息
+	*create by 李文辉
+	*/
+	$(function(){
+		$(document).on("click",".delneed",function(){
+			var $userneed=$(this);
+			var userneedid=$(this).attr("userneedid");
+			layer.confirm('您是否想删除此条信息？',{btn:['确定','取消']},function(){
+				$.ajax({
+					url: '/need/deleteUserNeedById.html',
+					data:{'id':userneedid},
+					type:'POST',
+					dataType: 'json',
+					success: function(data){
+						if(data.code==200){
+							$userneed.parents("tr").remove();
+							layer.msg('已删除!',{icon:1,time:1000});
+						}else{
+							layer.msg('删除失败!',{icon:2,time:1000});
+						}
+						
+					},
+					error:function(data) {
+						layer.msg('删除失败!',{icon:2,time:1000});
+						console.log(data.msg);
+					},
+				});
+			},function(){
+				
+			});
+			
+		});
+	});
 </script>
 </body>
 </html>

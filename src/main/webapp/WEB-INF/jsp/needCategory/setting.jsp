@@ -19,13 +19,20 @@
 <div id="container">
             <form class="layui-form" action="" id="dataForm">
                 <input type="hidden"  name="id" value="${category.id}">
+                <input type="hidden"  name="oldName" value="${category.name}">
+                <input type="hidden"  name="type" value="${category.type}">
+                <input type="hidden"  name="level" value="${category.level}">
+                <input type="hidden"  name="fullName" value="${category.fullName}">
+                <input type="hidden"  name="code" value="${category.code}">
                 <div class="layui-form-item">
-                    <%--<div class="layui-inline">--%>
-                        <%--<label class="layui-form-label">类目名称</label>--%>
-                        <%--<div class="layui-input-inline">--%>
-                            <%--<input type="text" name="name" value="${category.name}" class="layui-input">--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
+                <c:if test="${category.level != 1}">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">类目名称</label>
+                        <div class="layui-input-inline">
+                            <input id="categoryName" type="text" name="name" value="${category.name}" class="layui-input">
+                        </div>
+                    </div>
+                </c:if>
                     <div class="layui-input-block">
                         <button class="layui-btn" id="addAttr" type="button" >添加属性</button>
                     </div>
@@ -63,6 +70,11 @@
 
             //监听提交
             form.on('submit(demo1)', function(data){
+                var val = $("#categoryName").val();
+                if(val.indexOf("-") > -1) {
+                    layer.alert("类目名称请不要包含特殊字符“-”");
+                    return false;
+                }
                 $.ajax({
                     type: "POST",
                     url: "/needCategory/operation.json",
@@ -71,9 +83,9 @@
                     success: function (data) {
                         if (data) {
                             layer.alert("设置成功");
-                            parent.layer.closeAll();
+                            parent.location.reload();
                         } else {
-                            layer.msg("失败！");
+                            layer.msg("类目名称不可以重复！");
                         }
                     }
                 });

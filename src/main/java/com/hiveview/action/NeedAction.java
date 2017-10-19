@@ -1,13 +1,14 @@
 package com.hiveview.action;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.StringUtil;
 import com.hiveview.action.base.BaseController;
 import com.hiveview.entity.ApprovalRecord;
-import com.hiveview.entity.Paging;
 import com.hiveview.entity.Need;
-import com.hiveview.entity.UserNeed;
+import com.hiveview.entity.Paging;
 import com.hiveview.entity.bo.Data;
 import com.hiveview.service.IApprovalRecordService;
 import com.hiveview.service.INeedService;
@@ -94,6 +95,36 @@ public class NeedAction extends BaseController {
         return new Data(200,"success");
     }
 
+    
+    /**
+     *  @功能:删除用户需求信息
+     *  @作者:李文辉 
+     *  @代号:ab
+     *  @时间:2017年5月22日
+     *  @param req
+     *  @param id
+     *  @return  
+     */
+    @RequestMapping(value="/deleteUserNeedById")
+    @ResponseBody 
+    public String deleteUserNeedById(HttpServletRequest req,Integer id) {
+    	Data data=new Data(500, "error");
+    	int deleteUserNeedByPrimaryKey = needService.deleteUserNeedByPrimaryKey(id);
+    	if(deleteUserNeedByPrimaryKey>0){
+    		data.setCode(200);
+    		data.setMsg("success");
+    	}
+    	ObjectMapper mapper=new ObjectMapper();
+    	String writeValueAsString=null;
+    	try {
+			 writeValueAsString = mapper.writeValueAsString(data);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return writeValueAsString;
+    }
+    
 
     /**
      * 会员留言列表

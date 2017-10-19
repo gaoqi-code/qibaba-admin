@@ -21,7 +21,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 function fnTest(){
 	$.ajax({url:"app/show.html",success:function(data){
-		console.log(data);
 		$("#sss").hide();
 		$("#testContentDiv").html(data);
 	}});

@@ -18,6 +18,7 @@
         <th>所属类别</th>
         <th>描述</th>
         <th>添加时间</th>
+        <th>删除</th>
     </tr>
     </thead>
     <tbody>
@@ -29,11 +30,12 @@
             <td>${need.cName}</td>
             <td>${need.needDesc}</td>
             <td> <fmt:formatDate value="${need.addTime}" pattern="yyyy-MM-dd HH:mm:ss" type="date" dateStyle="long" /></td>
+            <td><a userneedid="${need.id}" class="delneed" href="javascript:;"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
         </tr>
     </c:forEach>
     <c:if test="${empty needs}">
         <tr>
-            <td colspan="5" style="text-align: center;">暂无需求！</td>
+            <td colspan="6" style="text-align: center;">暂无需求！</td>
         </tr>
     </c:if>
     </tbody>

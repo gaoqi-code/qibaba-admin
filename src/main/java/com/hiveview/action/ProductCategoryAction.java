@@ -64,6 +64,10 @@ public class ProductCategoryAction extends BaseController {
         Boolean flag = false;
         if (category.getId() != null) {
             try {
+                if (!(category.getOldName().equals(category.getName()))
+                        && categoryService.checkCategoryNameRepetition(category.getName(), category.getType())) {
+                    return flag;
+                }
                 category.setUpdateTime(new Date());
                 categoryService.updateCategoryAndAttr(category);
                 flag = true;
@@ -73,6 +77,7 @@ public class ProductCategoryAction extends BaseController {
         }
         return flag;
     }
+
     @ResponseBody
     @RequestMapping(value="/delete")
     public Boolean delete(HttpServletRequest request) {

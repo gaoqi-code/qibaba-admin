@@ -89,7 +89,7 @@
 
             layedit.set({
                 uploadImage: {
-                    url: '/newFileUpload/upload.json' //接口url
+                    url: 'http://image.qibaba.cn/fileUpload/iframeCrossOriginUpload/admin.html' //接口url
                     ,type: 'post' //默认post
                 }
             });

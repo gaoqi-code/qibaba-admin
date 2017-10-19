@@ -17,7 +17,7 @@
         <th style="text-align: left;">类目名称</th>
         <th>类目等级</th>
         <%--<th>类型</th>--%>
-        <%--<th>类目code</th>--%>
+        <th>类目code</th>
         <th>更新时间</th>
         <th>添加子级类目</th>
         <th>操作</th>
@@ -49,7 +49,7 @@
                 <%--<c:if test="${category.type == 4}">通用类目</c:if>--%>
                 <%--</span>--%>
             <%--</td>--%>
-            <%--<td>${category.code}</td>--%>
+            <td><span class="color${category.level}">${category.code}</span></td>
             <td>
                  <span class="color${category.level}"><fmt:formatDate value="${category.updateTime != null ? category.updateTime:category.addTime}"   pattern="yyyy-MM-dd HH:mm:ss" type="date" dateStyle="long" /></span>
             </td>
